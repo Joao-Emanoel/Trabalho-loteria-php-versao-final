@@ -17,9 +17,7 @@ echo "l::::::lo:::::::::::::::o      tt::::::::::::::t e::::::::eeeeeeee   r::::
 echo "l::::::l oo:::::::::::oo         tt:::::::::::tt  ee:::::::::::::e   r:::::r           i::::::i a::::::::::aa:::a\n" ;
 echo "llllllll   ooooooooooo             ttttttttttt      eeeeeeeeeeeeee   rrrrrrr           iiiiiiii  aaaaaaaaaa  aaaa\n \n" ;
 
-//adicionar função clear aqui
-
-sleep(1);
+limpa(2);
 
 $jogando = true;
 
@@ -29,6 +27,9 @@ $valor_limites_jogo = array(6, 20, 60, "Mega-sena", 15, 20, 25, "Lotofácil", 5,
 $valor_mega_sena = array(5, 35, 140, 420, 1050, 2310, 4620, 8580, 15015, 25025, 40040, 61880, 92820, 135660, 193800); 
 $valor_quina = array(2.5, 15, 52.5, 140, 315, 630, 1155, 1980, 3217.5, 5005, 7507.5);
 $valor_lotofacil = array(3, 48, 408, 2448, 11628, 46512);
+//o array "valor_limites_jogo" me ajudam a definir o mínimo de dezenas,
+//o máximo de dezenas, e o maior número possível a ser sorteado na surpresinha
+
 
 $max_dezena = 20;
 $min_dezena = 6; 
@@ -36,10 +37,8 @@ $min_dezena = 6;
 while ($jogando == true) {
 
     
-    menu();
+    $jogo = menu();
     
-
-    $jogo = readline("Escolha a opção: ");
 
     if ($jogo == "0" ) {
         break;
@@ -49,9 +48,7 @@ while ($jogando == true) {
 
         echo "Informe uma opção válida\n";
 
-        menu();
-    
-        $jogo = readline("Escolha a opção: ");
+        $jogo = menu();
     }
 
     $numapostas = readline("Quantas apostas você deseja: ");
@@ -134,16 +131,15 @@ while ($jogando == true) {
 
         echo "O total de gastos atual é: R$".$saldo_gastos."\n \n";
 
-        sleep(2);
+        limpa(2);
 
-        
     }
 
 
 
 echo "Jogo encerrado. Seu total de gastos é R$".$saldo_gastos."\n";
 
-function definir_jogo($jogo_f, $valor_limites_jogo, $pos, ){
+function definir_jogo($jogo_f, $valor_limites_jogo, $pos){
 
         $x = $valor_limites_jogo[4 * $jogo_f - $pos];
 
@@ -167,4 +163,15 @@ function menu(){
     echo "              0-          -SAIR          # \n";
     echo "              ############################ \n \n";
 
+    $jogo = readline("Escolha a opção: ");
+
+    return $jogo; 
+
+}
+
+function limpa($tempo){
+
+    sleep($tempo);
+
+    echo "\033c";
 }
