@@ -1,21 +1,6 @@
 <?php
 
-echo "lllllll                           tttt                                                   iiii                    \n" ;
-echo "l:::::l                        ttt:::t                                                  i::::i                   \n" ;
-echo "l:::::l                        t:::::t                                                   iiii                    \n" ;
-echo "l:::::l                        t:::::t                                                                           \n" ;
-echo " l::::l    ooooooooooo   ttttttt:::::ttttttt        eeeeeeeeeeee    rrrrr   rrrrrrrrr  iiiiiii   aaaaaaaaaaaaa   \n" ;
-echo " l::::l  oo:::::::::::oo t:::::::::::::::::t      ee::::::::::::ee  r::::rrr:::::::::r i:::::i   a::::::::::::a  \n" ;
-echo " l::::l o:::::::::::::::ot:::::::::::::::::t     e::::::eeeee:::::eer:::::::::::::::::r i::::i   aaaaaaaaa:::::a \n" ;
-echo " l::::l o:::::ooooo:::::otttttt:::::::tttttt    e::::::e     e:::::err::::::rrrrr::::::ri::::i            a::::a \n" ;
-echo " l::::l o::::o     o::::o      t:::::t          e:::::::eeeee::::::e r:::::r     r:::::ri::::i     aaaaaaa:::::a \n" ;
-echo " l::::l o::::o     o::::o      t:::::t          e:::::::::::::::::e  r:::::r     rrrrrrri::::i   aa::::::::::::a \n" ;
-echo " l::::l o::::o     o::::o      t:::::t          e::::::eeeeeeeeeee   r:::::r            i::::i  a::::aaaa::::::a \n" ;
-echo " l::::l o::::o     o::::o      t:::::t    tttttte:::::::e            r:::::r            i::::i a::::a    a:::::a \n" ;
-echo "l::::::lo:::::ooooo:::::o      t::::::tttt:::::te::::::::e           r:::::r           i::::::ia::::a    a:::::a \n" ;
-echo "l::::::lo:::::::::::::::o      tt::::::::::::::t e::::::::eeeeeeee   r:::::r           i::::::ia:::::aaaa::::::a \n" ;
-echo "l::::::l oo:::::::::::oo         tt:::::::::::tt  ee:::::::::::::e   r:::::r           i::::::i a::::::::::aa:::a\n" ;
-echo "llllllll   ooooooooooo             ttttttttttt      eeeeeeeeeeeeee   rrrrrrr           iiiiiiii  aaaaaaaaaa  aaaa\n \n" ;
+echo "LOTERIA CAIXA";
 
 limpa(2);
 
@@ -23,23 +8,18 @@ $jogando = true;
 
 $saldo_gastos = 0;
 
-$valor_limites_jogo = array(6, 20, 60, "Mega-sena", 15, 20, 25, "Lotofácil", 5, 15, 80, "Quina", 50, 50, 100, "Lotofácil");
-$valor_mega_sena = array(5, 35, 140, 420, 1050, 2310, 4620, 8580, 15015, 25025, 40040, 61880, 92820, 135660, 193800); 
-$valor_quina = array(2.5, 15, 52.5, 140, 315, 630, 1155, 1980, 3217.5, 5005, 7507.5);
-$valor_lotofacil = array(3, 48, 408, 2448, 11628, 46512);
-//o array "valor_limites_jogo" me ajudam a definir o mínimo de dezenas,
-//o máximo de dezenas, e o maior número possível a ser sorteado na surpresinha
-
-
+$valor_limites_jogo = array(6, 20, 60, "Mega-sena", 15, 20, 25, "Lotofácil", 5, 15, 80, "Quina", 50, 50, 100, "Lotofácil");             
+$valor_dezena_array = array(1 => array(5, 35, 140, 420, 1050, 2310, 4620, 8580, 15015, 25025, 40040, 61880, 92820, 135660, 193800),
+                            2 => array(3, 48, 408, 2448, 11628, 46512),                                                                                                               
+                            3 => array(2.5, 15, 52.5, 140, 315, 630, 1155, 1980, 3217.5, 5005, 7507.5));
+                      
 $max_dezena = 20;
 $min_dezena = 6; 
 
 while ($jogando == true) {
 
-    
     $jogo = menu();
     
-
     if ($jogo == "0" ) {
         break;
     }
@@ -58,7 +38,6 @@ while ($jogando == true) {
         $numapostas = readline("Quantas apostas você deseja: ");
     }
 
-
         $min_dezena = definir_jogo($jogo, $valor_limites_jogo, 4);
 
         $max_dezena = definir_jogo($jogo, $valor_limites_jogo, 3);
@@ -76,6 +55,8 @@ while ($jogando == true) {
 
         }
     
+        $valor_dezena = $valor_dezena_array[$jogo][$numdezenas - $min_dezena];
+
     }
     else{
 
@@ -83,26 +64,6 @@ while ($jogando == true) {
         $numdezenas = 50;
     }
 
-    if($jogo == 1){
-
-        $valor_dezena = $valor_mega_sena[$numdezenas - 6];
-
-    }
-
-    elseif($jogo == 2){
-
-        $valor_dezena = $valor_lotofacil[$numdezenas - 15];
-
-    }
-
-    elseif($jogo == 3){
-
-        $valor_dezena = $valor_quina[$numdezenas - 5];
-
-    }
-
-
-       
         for ($i = 0; $i < $numapostas; $i++) {
             $posicao = $i + 1;
             echo "\n" . $posicao . "° Sorteio: ";
@@ -134,8 +95,6 @@ while ($jogando == true) {
         limpa(2);
 
     }
-
-
 
 echo "Jogo encerrado. Seu total de gastos é R$".$saldo_gastos."\n";
 
